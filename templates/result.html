@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Result</h2>
+
+<p><strong>Your estimated footprint is:</strong> <span style="font-size: 1.5em;">{{ total }} kg CO₂/year</span></p>
+<p>{{ message }}</p>
+
+<canvas id="chart" width="300" height="300"></canvas>
+
+<a href="{{ url_for('index') }}">
+    <button>Back to Home</button>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('chart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Transport', 'Meat', 'Electricity'],
+            datasets: [{
+                label: 'Carbon Emissions (kg CO₂)',
+                data: [{{ data.transport }}, {{ data.meat }}, {{ data.energy }}],
+                backgroundColor: ['#66bb6a', '#ef5350', '#42a5f5']
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}
+
+<a href="{{ url_for('index') }}">
+    <button style="text-align: center; margin-top: 15px;">Back to Home</button>
+</a>

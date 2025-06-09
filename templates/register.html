@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="text-align: center;">Register to EcoImpact 🌍</h2>
+
+<div style="
+    max-width: 400px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 1em;
+    line-height: 1.6;
+">
+    <form method="POST">
+        <label style="font-weight: bold;">Username:</label>
+        <input type="text" name="username" required style="width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 6px; border: 1px solid #ccc;">
+
+        <label style="font-weight: bold;">Password:</label>
+        <input type="password" name="password" required style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 6px; border: 1px solid #ccc;">
+
+        <button type="submit" style="
+            width: 100%;
+            padding: 12px;
+            background-color: #66bb6a;
+            border: none;
+            color: white;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        ">Register</button>
+    </form>
+    
+    {% if error %}
+    <p style="color: red; text-align: center; font-weight: bold;">{{ error }}</p>
+    {% endif %}
+
+
+    <p style="text-align: center; margin-top: 15px;">
+        Already have an account? <a href="{{ url_for('login') }}">Login here</a>.
+    </p>
+</div>
+{% endblock %}

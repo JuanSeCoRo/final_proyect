@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Carbon Footprint Calculator</h2>
+<form action="{{ url_for('result') }}" method="POST">
+    <label for="transport">🚗 How many km do you travel per week?</label>
+    <input type="number" name="transport" id="transport" required>
+
+    <label for="meat">🍖 How many times per week do you eat meat?</label>
+    <input type="number" name="meat" id="meat" required>
+
+    <label for="energy">💡 How many kWh of electricity do you use per month?</label>
+    <input type="number" name="energy" id="energy" required>
+
+    <input type="submit" value="Calculate Footprint">
+</form>
+
+<a href="{{ url_for('index') }}">
+    <button style="text-align: center; margin-top: 15px;">Back to Home</button>
+</a>
+{% endblock %}

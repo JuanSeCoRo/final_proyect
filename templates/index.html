@@ -1,0 +1,59 @@
+{% extends 'base.html' %} 
+{% block content %} 
+<section style="text-align: center;"> 
+    <h2>Welcome to <span style="color:#2e7d32;">EcoImpact</span> 🌍</h2> 
+    <p> 
+        Your personal tool to measure your carbon footprint and learn how to reduce it.
+        <br> Let's make the planet greener, one habit at a time. 
+    </p>
+</section> 
+
+<!-- Educational section --> 
+<h1 style="text-align: center;">How You Can Help Prevent Climate Change 🌿</h1> 
+
+<div style="max-width: 700px; margin: 20px auto; background-color: #f9fbe7; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); font-size: 0.95em; line-height: 1.3;"> 
+    <p style="margin-bottom: 8px;">🚲 Choose biking, walking, or public transport when you can.</p> 
+    <p style="margin-bottom: 8px;">💡 Switch to LED bulbs and unplug devices when not in use.</p> 
+    <p style="margin-bottom: 8px;">🌱 Enjoy more plant-based meals and support local produce.</p> 
+    <p style="margin-bottom: 8px;">🛍️ Use reusable bags and water bottles every day.</p> 
+    <p style="margin-bottom: 8px;">🌳 Support reforestation and help protect existing forests.</p> 
+    <p style="margin-bottom: 8px;">♻️ Reduce waste — recycle, compost, and reuse materials.</p> 
+    <p style="margin-bottom: 8px;">🎓 Share what you learn with others — small actions inspire big change.</p> 
+</div> 
+
+<!-- Follow-Up Calls to Action -->
+<div style="max-width: 700px; margin: 50px auto; display: flex; flex-direction: column; gap: 30px;">
+
+
+    <div class="fade-in">
+        <h3 style="font-size: 1.4em;">📊 Curious about your carbon footprint?</h3>
+        <a href="{{ url_for('calculator') }}">
+            <button class="cta-button">Calculate My Impact</button>
+        </a>
+    </div>
+    
+    {% if current_user.is_authenticated %}
+    <div class="fade-in">
+        <h3 style="font-size: 1.4em;">🌤️ Want to see the climate in your city?</h3>
+        <a href="{{ url_for('climate') }}">
+            <button class="cta-button">Check Live Climate</button>
+        </a>
+    </div>
+
+    <div class="fade-in">
+        <h3 style="font-size: 1.4em;">🧾 Want to review your past results?</h3>
+        <a href="{{ url_for('history') }}">
+            <button class="cta-button">View My History</button>
+        </a>
+    </div>
+
+    <div class="fade-in">
+        <h3 style="font-size: 1.4em;">⚙️ Manage your account settings?</h3>
+        <a href="{{ url_for('settings') }}">
+            <button class="cta-button">Go to Settings</button>
+        </a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

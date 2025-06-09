@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 style="text-align: center;">Account Settings ⚙️</h2>
+
+<div style="
+    max-width: 400px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-size: 1em;
+    text-align: center;
+">
+
+    <!-- Show username -->
+    <p style="margin-bottom: 20px;">Logged in as: <strong>{{ current_user.username }}</strong></p>
+
+    <!-- Log out button -->
+    <a href="{{ url_for('logout') }}">
+        <button style="width: 100%; margin-bottom: 15px;">Log Out</button>
+    </a>
+
+    <!-- Change password section -->
+    <h3 style="margin-top: 30px; margin-bottom: 10px; font-size: 1.1em; color: gray;">Change Password 🔒</h3>
+
+    <a href="{{ url_for('change_password') }}">
+        <button style="width: 100%; margin-bottom: 15px; background-color: gray;">Change Password</button>
+    </a>
+    
+
+    <!-- Delete account -->
+    <h3 style="margin-top: 30px; margin-bottom: 10px; font-size: 1.1em; color: red;">Delete Account ⚠️</h3>
+
+    <form id="delete-account-form" action="{{ url_for('delete_account') }}" method="POST" style="margin: 0; padding: 0; background: none; box-shadow: none;">
+        <button type="button" id="delete-account-btn" style="
+            width: 100%;
+            background-color: #ef5350;
+            border: none;
+            padding: 12px;
+            color: white;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        ">
+            Delete My Account
+        </button>
+    </form>
+
+    <!-- Back to home button -->
+    <a href="{{ url_for('index') }}">
+        <button style="text-align: left; margin-top: 30px;">Back to Home</button>
+    </a>
+</div>
+
+<div id="miniDeleteConfirmTab" class="mini-confirm-tab">
+    <p>Are you sure you want to delete your account?<br>This action cannot be undone.</p>
+    <div>
+        <button id="miniDeleteConfirmYes" class="confirm-btn">Yes, delete it</button>
+        <button id="miniDeleteConfirmNo" class="cancel-btn">Cancel</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("delete-account-btn").addEventListener("click", function() {
+    document.getElementById("miniDeleteConfirmTab").style.display = "block";
+});
+
+document.getElementById("miniDeleteConfirmNo").addEventListener("click", function() {
+    document.getElementById("miniDeleteConfirmTab").style.display = "none";
+});
+
+document.getElementById("miniDeleteConfirmYes").addEventListener("click", function() {
+    document.getElementById("delete-account-form").submit();
+});
+</script>
+
+{% endblock %}

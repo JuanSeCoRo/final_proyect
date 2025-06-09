@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Past Footprint Results</h2>
+
+{% if results %}
+<table>
+    <tr>
+        <th>Date</th>
+        <th>Transport</th>
+        <th>Meat</th>
+        <th>Electricity</th>
+        <th>Total (kg CO₂)</th>
+    </tr>
+    {% for r in results %}
+    <tr>
+        <td>{{ r.date }}</td>
+        <td>{{ r.transport }}</td>
+        <td>{{ r.meat }}</td>
+        <td>{{ r.energy }}</td>
+        <td><strong>{{ r.total }}</strong></td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>No records yet. Go calculate your footprint!</p>
+{% endif %}
+
+<div style="display: flex; justify-content: space-between; margin-top: 30px;">
+    <a href="{{ url_for('index') }}">
+        <button style="
+            background-color: #66bb6a;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+        ">Back to Home</button>
+    </a>
+
+    <form id="clear-history-form" action="{{ url_for('clear_history') }}" method="POST" style="margin: 0; padding: 0; background: none; box-shadow: none;">
+        <button type="button" id="clear-history-btn" style="
+            background-color: #ef5350;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+        ">
+            Clear History
+        </button>
+    </form>
+</div>
+
+<div id="miniConfirmTab" class="mini-confirm-tab">
+    <p>Are you sure you want to clear your history?</p>
+    <div>
+        <button id="miniConfirmYes" class="confirm-btn">Yes</button>
+        <button id="miniConfirmNo" class="cancel-btn">Cancel</button>
+    </div>
+</div>
+
+<script>
+document.getElementById("clear-history-btn").addEventListener("click", function() {
+    document.getElementById("miniConfirmTab").style.display = "block";
+});
+
+document.getElementById("miniConfirmNo").addEventListener("click", function() {
+    document.getElementById("miniConfirmTab").style.display = "none";
+});
+
+document.getElementById("miniConfirmYes").addEventListener("click", function() {
+    document.getElementById("clear-history-form").submit();
+});
+</script>
+
+{% endblock %}

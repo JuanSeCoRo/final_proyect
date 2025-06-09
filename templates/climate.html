@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Live Climate Data</h2>
+
+<form method="POST" style="max-width: 400px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <label for="city">Enter your city:</label>
+    <input type="text" name="city" id="city" required placeholder="e.g. New York" style="width: 95%; padding: 10px; margin-bottom: 10px; margin-top: 10px; border-radius: 6px; border: 1px solid #ccc;">
+    <button type="submit">Check Weather</button>
+</form>
+
+{% if weather %}
+    <div style="margin-top: 30px; max-width: 500px; margin-left: auto; margin-right: auto; background-color: #f9fbe7; padding: 20px; border-radius: 12px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+        {% if weather.error %}
+            <p style="color: red;">{{ weather.error }}</p>
+        {% else %}
+            <h3 style="text-align: center;">Current Weather in {{ weather.city }}</h3>
+            <p>🌡️ <strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+            <p>💨 <strong>Wind Speed:</strong> {{ weather.windspeed }} km/h</p>
+            <p>📋 <strong>Weather Code:</strong> {{ weather.weathercode }}</p>
+        {% endif %}
+    </div>
+{% endif %}
+
+<a href="{{ url_for('index') }}">
+    <button style="text-align: center; margin-top: 15px;">Back to Home</button>
+</a>
+
+{% endblock %}
