@@ -133,7 +133,7 @@ def login():
         if not user:
             error = "Account does not exist."
         elif user.password != password:
-            error = "Incorrect password."
+            error = "Incorrect username or password."
         else:
             login_user(user)
             return redirect(url_for('index'))
